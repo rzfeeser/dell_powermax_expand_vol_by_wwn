@@ -9,8 +9,8 @@
     ush: 10.126.70.19   ## IP of unisphere host
 
   
-  collection:
+  collections:
     - dellemc.powermax
     
   roles:
-    - dell_powermax_expand_vol_by_wwn
+    - rzfeeser.dell_powermax_expand_vol_by_wwn
