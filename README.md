@@ -22,7 +22,23 @@ Requirements
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## The following variables are HARDCODED into the role
+usv: "90" ## Per docs, this appears to be always set to 90 (for now)
+vc: False ## verify cert set to false for testing purposes
+un: smc  ## This is the USER NAME for the DELL PMAX
+pw: smc  ## This is the PASSWORD for the DELL PMAX
+
+## The following variable needs to be defined
+# ush: ## define in playbook - IP of unisphere host
+
+# this is the format to resize one or more volumes by WWN
+## This list of dictionaires 'listofwwn2expand' should be defined in an external file
+## and pointed to when the role is run (see below for example of pointing to file 'wwns_to_expand')
+#listofwwn2expand:
+#  - wwn: "60000970000197900507533030304538" ## a single wwn to expand (quote to make STRING)
+#    nsov: 33 ## new size in GB to expand the volume to (int) (total size)
+#  - wwn: "60000970000197900507533030383621" ## a single wwn to expand (quote to make STRING)
+#    nsov: 34 ## new size in GB to expand the volume to (int) (total size)
 
 Dependencies
 ------------
@@ -34,14 +50,22 @@ Example Playbook
 
 An example of using this role is below. Notice that the collection is referenced, or the Dell EMC PowerMax modules and plugin must be installed, before Ansible can utilize this role. 
 
-    - name: Expanding Dell EMC PowerMax volumes by WWN
-      hosts: localhost
-      
-      collection:
-        - dellemc.powermax
-        
-      roles:
-        - dell_powermax_expand_vol_by_wwn
+        ---
+        - name: Expanding Dell EMC PowerMax volumes by WWN by RZFeeser
+          hosts: localhost
+          
+          vars_files:
+            - wwns_to_expand.yml    # define var 'listofwwn2expand'
+          
+          vars:
+            ush: 10.126.70.19   ## IP of unisphere host
+
+          
+          collection:
+            - dellemc.powermax
+            
+          roles:
+            - dell_powermax_expand_vol_by_wwn
 
 License
 -------
@@ -54,3 +78,24 @@ Author Information
 Dell EMC reached out to me to provide automation solutions for their Dell EMC PowerMax product. I'm an automation consultant / trainer, so, if you need help Automating your Dell EMC infrastructure, we should talk! I'd love to run a training solution for you and your team!
 
 Written by Russell Zachary Feeser for Dell EMC. Contact z at rzfeeser.com or just visit rzfeeser.com if you're looking for Ansible training, or using Ansible with Dell EMC products.
+
+Author: Russell Zachary Feeser
+
+Contact:
+    email: rzfeeser at gmail.com or z at rzfeeser.com
+
+Profession: Trainer and Consultant
+
+Available for:
+    - Ansible
+    - Ansible Module Design with Python
+    - Ansible for <your vendor here>
+    - Network Automation with Python and Ansible
+    - Python for API and API Design
+    - Python Basics
+    - OpenStack
+    - 5G
+    - 4G LTE
+    - IP Multimedia Subsystem
+    - Session Initiation Protocol
+    - Playing Minecraft and StarCraft II :p
