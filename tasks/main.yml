@@ -1,0 +1,27 @@
+---
+- name: Expand Vols by WWN
+  block:
+    - name: Show Array corresponding to the WWN
+      debug:
+        var: item.wwn[8:20]
+      loop: "{{ listofwwn2expand }}"
+      
+    - name: Expand Volume by WWN
+      dellemc_powermax_volume:
+        unispherehost: "{{ ush }}"
+        universion: "{{ usv }}"
+        verifycert: "{{ vc }}"
+        user: "{{ un }}"
+        password: "{{ pw }}"
+        serial_no: "{{ item.wwn|string|[8:20] }}"  ## a wwn contains the array in this slice
+        size: "{{ item.nsov }}"
+        cap_unit: GB
+        vol_wwn: "{{ item.wwn|string }}"
+        state: present
+      register: expandvolresults
+      loop: "{{ listofwwn2expand }}"
+        
+  rescue:          
+    - name: Failed expanding volume
+      fail:
+        msg: "Failed expanding volume. Consider designing rollback tasks before exiting."
