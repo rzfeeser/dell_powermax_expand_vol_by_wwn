@@ -13,10 +13,10 @@
         verifycert: "{{ vc }}"
         user: "{{ un }}"
         password: "{{ pw }}"
-        serial_no: "{{ item.wwn[8:20] }}"  ## a wwn contains the array in this slice
+        serial_no: "{{ (item.wwn|string)[8:20] }}"  ## a wwn contains the array in this slice
         size: "{{ item.nsov }}"
         cap_unit: GB
-        vol_wwn: "{{ item.wwn }}"
+        vol_wwn: "{{ item.wwn|string }}"
         state: present
       register: expandvolresults
       loop: "{{ listofwwn2expand }}"
