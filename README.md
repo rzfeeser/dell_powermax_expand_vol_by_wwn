@@ -1,14 +1,23 @@
 Role Name
 =========
 
-Dell PowerMax Flash Storage Arrays require additional software available from https://github.com/ / to run. After installing that software, this role may be used to expand volume(s) by wwn.
+Dell PowerMax Flash Storage Arrays require additional software available from https://github.com/dell/ansible-powermax to run. Despite the documentation provided by https://github.com/dell/ansible-powermax the easiest way to access the required Dell EMC PowerMax modules is by using their (not well advertised) role (which makes accessible an Ansible collection). I was the first download on the Dell EMC PowerMax role / collection, so I know it is not being widely used. However, it's very easy to use with the following instructions
 
-Written by Russell Zachary Feeser for Dell EMC. Contact z@rzfeeser.com or rzfeeser.com if you're looking for Ansible training on Dell EMC products.
+- Install the role / collection with the instructions on https://galaxy.ansible.com/dellemc/powermax
+- Now reference this collection at the top of your playbook, this reference allows ansible to use the Dell EMC PowerMax modules. If you never used a collection, check out some of the example playbooks packaged with this role. It's pretty easy.
+
+After following the above steps, this role may be used to expand volume(s) by providing a list of dictionaries, documenting the wwn to expand, and the size (in GB) to expand that wwn to.
+
+Dell EMC reached out to me to provide automation solutions for their Dell EMC PowerMax product. I'm an automation consultant / trainer, so, if you need help Automating your Dell EMC infrastructure, we should talk! I'd love to run a training solution for you and your team!
+
+Written by Russell Zachary Feeser for Dell EMC. Contact z at rzfeeser.com or just visit rzfeeser.com if you're looking for Ansible training, or using Ansible with Dell EMC products.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Install the role / collection with the instructions on https://galaxy.ansible.com/dellemc/powermax
+- Reference the `dellemc.powermax` collection at the top of each playbook
+- (Alternatively) Follow the instructions found within the documentation on https://github.com/dell/ansible-powermax to 'hard install' the prerequisite dependencies to avoid referencing the `dellemc.powermax` collection in every playbook solution
 
 Role Variables
 --------------
@@ -18,16 +27,21 @@ A description of the settable variables for this role should go here, including 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+See "Requirements".
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+An example of using this role is below. Notice that the collection is referenced, or the Dell EMC PowerMax modules and plugin must be installed, before Ansible can utilize this role. 
 
-    - hosts: servers
+    - name: Expanding Dell EMC PowerMax volumes by WWN
+      hosts: localhost
+      
+      collection:
+        - dellemc.powermax
+        
       roles:
-         - { role: username.rolename, x: 42 }
+        - dell_powermax_expand_vol_by_wwn
 
 License
 -------
@@ -37,4 +51,6 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Dell EMC reached out to me to provide automation solutions for their Dell EMC PowerMax product. I'm an automation consultant / trainer, so, if you need help Automating your Dell EMC infrastructure, we should talk! I'd love to run a training solution for you and your team!
+
+Written by Russell Zachary Feeser for Dell EMC. Contact z at rzfeeser.com or just visit rzfeeser.com if you're looking for Ansible training, or using Ansible with Dell EMC products.
