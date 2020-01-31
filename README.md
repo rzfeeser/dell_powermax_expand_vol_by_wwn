@@ -89,7 +89,7 @@ Profession: Trainer and Consultant
 Available for:
     - Ansible
     - Ansible Module Design with Python
-    - Ansible for <your vendor here>
+    - Ansible for *your vendor(s) here* (no upcharge for custom training!)
     - Network Automation with Python and Ansible
     - Python for API and API Design
     - Python Basics
