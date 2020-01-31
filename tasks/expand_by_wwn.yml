@@ -22,9 +22,9 @@
     - name: ensure error file exists
       file:
         state: touch
-        path: failed_wwns.yml
+        path: "failed_wwns-{{ ansible_date_time.epoch }}.yml"
     
     - name: Writeout failed WWN
       lineinfile:
-        dest: failed_wwns.yml
+        dest: "failed_wwns-{{ ansible_date_time.epoch }}.yml"
         line: "{{ item.wwn }} failed to expand to {{ item.nsov }}"
