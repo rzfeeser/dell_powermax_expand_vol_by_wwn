@@ -21,7 +21,7 @@
     
     - name: ensure error file exists
       file:
-        state: file
+        state: touch
         path: failed_wwns.yml
     
     - name: Writeout failed WWN
