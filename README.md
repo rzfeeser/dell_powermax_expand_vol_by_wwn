@@ -8,7 +8,7 @@ Dell PowerMax Flash Storage Arrays require additional software available from ht
 
 After following the above steps, this role may be used to expand volume(s) by providing a list of dictionaries, documenting the wwn to expand, and the size (in GB) to expand that wwn to.
 
-If a WWN cannot be expanded, it is written into the file, "failed-wwns.yml"
+If a WWN cannot be expanded, it is written into the file, "failed-wwns-(ansible_date_time.epoch).yml"
 
 Dell EMC reached out to me to provide automation solutions for their Dell EMC PowerMax product. I'm an automation consultant / trainer, so, if you need help Automating your Dell EMC infrastructure, we should talk! I'd love to run a training solution for you and your team! See my author info at the bottom of the module for ways to reach out to me.
 
@@ -35,9 +35,9 @@ Role Variables
         ## This list of dictionaires 'listofwwn2expand' should be defined in an external file
         ## and pointed to when the role is run (see below for example of pointing to file 'wwns_to_expand.yml')
         #listofwwn2expand:
-        #  - wwn: "60000970000197900507533030304538" ## a single wwn to expand (quote to make STRING)
+        #  - wwn: 60000970000197900507533030304538 ## a single wwn to expand (int or string is fine)
         #    nsov: 33 ## new size in GB to expand the volume to (int) (total size)
-        #  - wwn: "60000970000197900507533030383621" ## a single wwn to expand (quote to make STRING)
+        #  - wwn: 60000970000197900507533030383621 ## a single wwn to expand (int or string is fine)
         #    nsov: 34 ## new size in GB to expand the volume to (int) (total size)
 
 Dependencies
