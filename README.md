@@ -22,23 +22,23 @@ Requirements
 Role Variables
 --------------
 
-## The following variables are HARDCODED into the role
-usv: "90" ## Per docs, this appears to be always set to 90 (for now)
-vc: False ## verify cert set to false for testing purposes
-un: smc  ## This is the USER NAME for the DELL PMAX
-pw: smc  ## This is the PASSWORD for the DELL PMAX
+        ## The following variables are HARDCODED into the role
+        usv: "90" ## Per docs, this appears to be always set to 90 (for now)
+        vc: False ## verify cert set to false for testing purposes
+        un: smc  ## This is the USER NAME for the DELL PMAX
+        pw: smc  ## This is the PASSWORD for the DELL PMAX
 
-## The following variable needs to be defined
-# ush: ## define in playbook - IP of unisphere host
+        ## The following variable needs to be defined
+        # ush: ## define in playbook - IP of unisphere host
 
-# this is the format to resize one or more volumes by WWN
-## This list of dictionaires 'listofwwn2expand' should be defined in an external file
-## and pointed to when the role is run (see below for example of pointing to file 'wwns_to_expand.yml')
-#listofwwn2expand:
-#  - wwn: "60000970000197900507533030304538" ## a single wwn to expand (quote to make STRING)
-#    nsov: 33 ## new size in GB to expand the volume to (int) (total size)
-#  - wwn: "60000970000197900507533030383621" ## a single wwn to expand (quote to make STRING)
-#    nsov: 34 ## new size in GB to expand the volume to (int) (total size)
+        ## this is the format to resize one or more volumes by WWN
+        ## This list of dictionaires 'listofwwn2expand' should be defined in an external file
+        ## and pointed to when the role is run (see below for example of pointing to file 'wwns_to_expand.yml')
+        #listofwwn2expand:
+        #  - wwn: "60000970000197900507533030304538" ## a single wwn to expand (quote to make STRING)
+        #    nsov: 33 ## new size in GB to expand the volume to (int) (total size)
+        #  - wwn: "60000970000197900507533030383621" ## a single wwn to expand (quote to make STRING)
+        #    nsov: 34 ## new size in GB to expand the volume to (int) (total size)
 
 Dependencies
 ------------
