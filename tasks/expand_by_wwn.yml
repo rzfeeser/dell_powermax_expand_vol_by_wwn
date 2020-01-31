@@ -21,8 +21,8 @@
     
     - name: ensure error file exists
       file:
-        state: present
-        dest: failed_wwns.yml
+        state: file
+        path: failed_wwns.yml
     
     - name: Writeout failed WWN
       lineinfile:
