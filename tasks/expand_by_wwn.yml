@@ -19,6 +19,11 @@
       debug:
         msg: "Error expanding WWN {{ item.wwn }} to {{ item.nsov }}" 
     
+    - name: ensure error file exists
+      file:
+        state: present
+        dest: failed_wwns.yml
+    
     - name: Writeout failed WWN
       lineinfile:
         dest: failed_wwns.yml
